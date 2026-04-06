@@ -15,4 +15,6 @@ public interface CustomerService {
     List<Customer> getCustomer(Long id);
 
     Customer placeOrderList(PlaceOrderDTO placeOrderDTO);
+
+    String payment(Long customerId, Long orderId);
 }

@@ -1,5 +1,6 @@
 package com.task.OrderManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.task.OrderManagementSystem.enums.Roles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,5 +32,6 @@ public class Customer {
 
     // if customer deleted all should be removed
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
     private List<Order> orderList;
 }

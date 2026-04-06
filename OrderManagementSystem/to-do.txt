@@ -1,1 +1,50 @@
 create DTO to create Customer then another for inserting/ order product
+
+problems--
+
+1. Null Pointer : ArrayList never instantiated
+2. SQLException : field value doesn't have a default value
+    for Status in Orders table ( PLACED, CANCELLED ) :
+        1. when check structure default value for that is null
+--------
+
+why infinite recursion
+ans : use response DTO then remove Jackson annotation to stop this
+
+to provide role based access : if not granted throw exception @Before
+
+check ----
+1. if put @NotNull will it add constraint on table as not null or just to validate & check while taking input only
+
+2. never instantiated orderList ( Customer ) & itemList ( PlaceOrderDTO )
+    a. assumption while fetching data even List is not instantiated Jackson just put data in it somehow
+    b. while POST req sending data sending inform list of object then it might instantiate & provide data like that
+
+Flow -----
+
+POSTMAN : data send -> Code : get data, work & modify -> Repo / DB: to save it to DB from code
+
+    1. to get Data from POSTMAN no need to instantiate
+        -> true, Jackson handles it
+    2. CODE : when GET data can fetch result that send from POSTMAN ( means getting only working on current data not saved one (DB) )
+        -> partially correct, can work with POSTMAN data & DB data both
+    3. DB : but when want to fetch data from DB to work with then List need to be instantiated ( wrong )
+        -> Hibernate handles it, no need to be instantiated when fetching or working with DB
+
+
+Expecting error ----
+
+    1. Get Order list of a Customer & print ( maybe wrong )
+    2. Get item list from particular Order  : solved, it'll never come
+
+main question ---
+    1. when NullPointerException will come considering didn't instantiate List : done
+
+new learning ----
+    1. Order order = new Order(); this is bad approach to mentioned as field
+
+    2. When NPE (Null pointer exception ) will come
+        -> when create Object manually, because this object is not loaded from DB so not handled by Hibernate also not came from POSTMAN so not by Jackson either.
+
+
+

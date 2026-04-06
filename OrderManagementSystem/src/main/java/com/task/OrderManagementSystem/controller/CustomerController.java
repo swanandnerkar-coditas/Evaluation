@@ -46,4 +46,13 @@ public class CustomerController {
         ApplicationResponse<Customer> response = new ApplicationResponse<>(customerService.placeOrderList(placeOrderDTO));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /*
+        for transaction purpose , achieving main goal first AOP of AfterThrowing & AfterReturning
+     */
+    @GetMapping("/{customerId}/payment/{orderId}")
+    public ResponseEntity<ApplicationResponse<String>> payment(@PathVariable Long customerId, @PathVariable Long orderId){
+        ApplicationResponse<String> response = new ApplicationResponse<>(customerService.payment(customerId, orderId));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
